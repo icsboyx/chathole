@@ -2,7 +2,6 @@
 use anyhow::*;
 
 use std::{
-    clone,
     collections::VecDeque,
     net::TcpStream,
     ops::Deref,

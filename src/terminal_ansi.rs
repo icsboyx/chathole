@@ -92,13 +92,13 @@ impl AnsiControlCodes {
 
 pub fn formatted_terminal(terminal: &mut Terminal) -> String {
     let ac = AnsiControlCodes;
-    let motd = [
-        "Welcome to the Rust Coded IcsBoyX ChatHole server\r\n",
-        "This is a work in progress\r\n",
-        "Please be patient\r\n",
-        "Type /help for a list of commands\r\n",
-    ]
-    .concat();
+    // let motd = [
+    //     "Welcome to the Rust Coded IcsBoyX ChatHole server\r\n",
+    //     "This is a work in progress\r\n",
+    //     "Please be patient\r\n",
+    //     "Type /help for a list of commands\r\n",
+    // ]
+    // .concat();
 
     if terminal.chat.len() == 0 {
         return [
