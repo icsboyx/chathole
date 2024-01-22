@@ -29,6 +29,8 @@ The server supports the following commands:
 
 - `/join <channel>`: This command is used to join a specific channel on the server. Replace `<channel>` with the name of the channel you want to join.
 
+- `/list `: This command is used to list all existing channels.
+
 - `/help`: This command is used to display the help information, which includes a list of all available commands and their descriptions.
 
 These commands are highlighted in yellow in the terminal for better visibility.

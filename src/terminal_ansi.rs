@@ -71,7 +71,7 @@ impl AnsiControlCodes {
     }
     pub fn clear_line(&self) -> String {
         // String::from("\x1B[2K")
-        String::from("\x1B[2K\x1B[E")
+        String::from("\x1B[2K")
     }
     pub fn clear_lines_to_end_of_screen(&self) -> String {
         String::from("\x1B[0J")
@@ -113,7 +113,7 @@ pub fn formatted_terminal(terminal: &mut Terminal) -> String {
     [
         ac.save_cursor(),
         ac.move_cursor(2, 0),
-        ac.clear_line().repeat(terminal.get_terminal_lines()),
+        ac.clear_line().repeat(terminal.get_terminal_lines()) + "\r\n",
         ac.move_cursor(2, 0),
         terminal.get_chat().dimmed().to_string(),
         ac.restore_cursor(),
@@ -126,6 +126,7 @@ pub fn update_prompt(terminal: &mut Terminal) -> String {
     [
         ac.move_cursor(terminal.get_terminal_lines() as u16 + 3, 0),
         ac.clear_lines_to_end_of_screen(),
+        ac.move_cursor(terminal.get_terminal_lines() as u16 + 3, 0),
         terminal.get_prompt().green().bold().to_string(),
     ]
     .concat()
@@ -134,8 +135,8 @@ pub fn update_prompt(terminal: &mut Terminal) -> String {
 pub fn restore_terminal() -> String {
     let ac = AnsiControlCodes;
     [
-        ac.clear_screen(),
         ac.clear_all(),
+        ac.clear_screen(),
         ac.exit_alt_screen(),
         ac.move_cursor(0, 0),
     ]

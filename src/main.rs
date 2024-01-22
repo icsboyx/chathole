@@ -100,6 +100,7 @@ fn handle_client(mut session: ClientStream) -> Result<()> {
                 break;
             }
             Ok(n) => {
+                println!("read {:?} bytes", &buffer[..n]);
                 if is_ctrl_c(&buffer[..n]) {
                     session
                         .client
@@ -127,7 +128,7 @@ fn handle_client(mut session: ClientStream) -> Result<()> {
                     continue;
                 }
 
-                if payload.is_empty() {
+                if payload.is_empty() || payload == "\r" {
                     let _ = session.stream.write(
                         update_prompt(&mut session.client.lock().unwrap().terminal).as_bytes(),
                     )?;
@@ -291,10 +292,28 @@ pub fn handle_service_bus(server_engine: ServerEngine) -> Result<()> {
                         continue;
                     }
                 }
+                "list" => {
+                    let channels = server_engine.channels.lock().unwrap().list.clone();
+                    let channels = channels.iter().cloned();
+
+                    for channel in channels {
+                        let name = channel.lock().unwrap().name.clone();
+                        let subscribers = channel.lock().unwrap().subscribers.len();
+                        client.lock().unwrap().rx.push_back(ChatMessage::new(
+                            "SERVER".blue().bold().to_string(),
+                            format!(
+                                "channel: {} users: {}",
+                                name.yellow(),
+                                subscribers.to_string().yellow()
+                            ),
+                        ))?;
+                    }
+                }
                 "help" => {
                     let commands = [
                         "/nick <nick>".yellow(),
                         "/join <channel>".yellow(),
+                        "/list".yellow(),
                         "/help".yellow(),
                     ];
 
