@@ -1,0 +1,14 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./Cargo.toml"
+    ],
+    "cSpell.words": [
+        "crossterm",
+        "Deque",
+        "nonblocking",
+        "ratatui",
+        "splitn",
+        "termion",
+        "Termwiz"
+    ]
+}
