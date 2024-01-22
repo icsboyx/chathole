@@ -10,8 +10,8 @@ To install and run this project, you need to have Rust installed on your machine
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/icsboyx/chathole.git
+cd chathole
 ```
 
 ## Usage

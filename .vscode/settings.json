@@ -3,6 +3,7 @@
         "./Cargo.toml"
     ],
     "cSpell.words": [
+        "chathole",
         "crossterm",
         "Deque",
         "nonblocking",
